@@ -98,7 +98,8 @@ public class Gui extends JFrame {
 
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     e.consume();
-                    
+                    ProcesarComando();
+
                     return;
                 }
 
@@ -321,9 +322,4 @@ public class Gui extends JFrame {
         areaConsola.setCaretPosition(areaConsola.getDocument().getLength());
         EscribirPrompt();
     }
-    
-    
-    
-    
-    
 }
