@@ -71,7 +71,7 @@ public class Gui extends JFrame {
         areaConsola.requestFocusInWindow();
     }
     
-    private void EscribirSalida(String texto) {
+    void EscribirSalida(String texto) {
         areaConsola.append(texto);
     }
     
@@ -320,9 +320,5 @@ public class Gui extends JFrame {
         EscribirSalida("\n");
         areaConsola.setCaretPosition(areaConsola.getDocument().getLength());
         EscribirPrompt();
-    }
-
-    void escribirLinea(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

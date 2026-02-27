@@ -23,7 +23,7 @@ public class comandosp2 {
     
     public void date(){
         String fecha = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
-        consola.escribirLinea("La fecha actual es: " + fecha);
+        consola.EscribirSalida("La fecha actual es: " + fecha);
     }
     
     public void time() {
@@ -33,7 +33,7 @@ public class comandosp2 {
     
     public void wr(String nombreArchivo)  {
         if(nombreArchivo.isEmpty()){
-            consola.escribirLinea("Uso: wr <archivo.ext>");
+            consola.EscribirSalida("Uso: wr <archivo.ext>");
             return;
         }
         
@@ -41,38 +41,38 @@ public class comandosp2 {
         
         java.io.File archivo = new java.io.File(ruta);
         if(!archivo.exists()){
-            consola.escribirLinea("El archivo no existe: " + nombreArchivo);
-            consola.escribirLinea("Cree el arhcivo primero con: mfile" + nombreArchivo);
+            consola.EscribirSalida("El archivo no existe: " + nombreArchivo);
+            consola.EscribirSalida("Cree el arhcivo primero con: mfile" + nombreArchivo);
             return;
         }
         
-        consola.escribirLinea("Escribiendo en: " + nombreArchivo);
-        consola.escribirLinea("(Escriba texto linea por linea. Escriba EXIT para terminar)");
+        consola.EscribirSalida("Escribiendo en: " + nombreArchivo);
+        consola.EscribirSalida("(Escriba texto linea por linea. Escriba EXIT para terminar)");
         
         try (FileWriter fw = new FileWriter(archivo, true)){
             while(true){
                 String linea = consola.pedirTexto("(Ingrese texto EXIT para terminar):");
                 if(linea == null){ 
-                    consola.escribirLinea("Escritura Cancelada");
+                    consola.EscribirSalida("Escritura Cancelada");
                     break;
                 }
                 
                 if(linea.equals("EXIT")){
-                    consola.escribirLinea("Escritura finalizada");
+                    consola.EscribirSalida("Escritura finalizada");
                     break;
                 }
                 
                 fw.write(linea + System.lineSeparator());
-                consola.escribirLinea(linea);         
+                consola.EscribirSalida(linea);         
             }
         } catch (Exception e) {
-            consola.escribirLinea("Error al escribir; " + e.getMessage());
+            consola.EscribirSalida("Error al escribir; " + e.getMessage());
         }
     }
     
     public void rd(String nombreArchivo){
         if(nombreArchivo.isEmpty()){
-            consola.escribirLinea("Uso: rd <archivo.ext>");
+            consola.EscribirSalida("Uso: rd <archivo.ext>");
             return;
         }
         
@@ -80,11 +80,11 @@ public class comandosp2 {
         
         java.io.File archivo = new java.io.File(ruta);
         if(!archivo.exists()) {
-            consola.escribirLinea("El archivo no existe: " + nombreArchivo);
+            consola.EscribirSalida("El archivo no existe: " + nombreArchivo);
             return;
         }
         
-        consola.escribirLinea("---- Contenido de " + nombreArchivo + "---");
+        consola.EscribirSalida("---- Contenido de " + nombreArchivo + "---");
         
         try(BufferedReader br = new BufferedReader(new FileReader(archivo))) {
             String linea;
@@ -92,19 +92,19 @@ public class comandosp2 {
             boolean vacio = true;
             
             while ((linea = br.readLine()) != null) {
-                consola.escribirLinea(linea);
+                consola.EscribirSalida(linea);
                 numLinea++;
                 vacio = false;
             }
             
             if(vacio) {
-                consola.escribirLinea("(El archivo esta vacio)");
+                consola.EscribirSalida("(El archivo esta vacio)");
             }
         }catch (Exception e) {
-            consola.escribirLinea("Error al leer: " + e.getMessage());
+            consola.EscribirSalida("Error al leer: " + e.getMessage());
         }
         
-        consola.escribirLinea("--- Fin del Archivo ---");
+        consola.EscribirSalida("--- Fin del Archivo ---");
     } 
 }
  
