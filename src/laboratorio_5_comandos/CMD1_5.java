@@ -75,27 +75,29 @@ public class CMD1_5 {
         }
     }
     
-    public void mkdir(String FolderName){
-        if(FolderName.isEmpty()){
-             consola.EscribirSalida("ERROR: Especificar nombre para la carpeta...");
-             consola.EscribirSalida("Ex: mkdir <nombre> ");
-            return;
-        }
-        
-        File newFolder = new File (dirActual, FolderName);
-        
-        if(newFolder.exists()){
-             consola.EscribirSalida("Error: Ya existe una carpeta con ese nombre");
-        }else{
-            if(newFolder.mkdir()){
-                 consola.EscribirSalida("Carpeta '"+FolderName + "'creada exitosamente.");
-            }else{
-                 consola.EscribirSalida("Eror: No se pudo crear la carpeta");
+    
+    
+        public void mkdir(String FolderName){
+            if(FolderName.isEmpty()){
+                consola.EscribirSalida("ERROR: Especificar nombre para la carpeta...\n");
+                consola.EscribirSalida("Ex: mkdir <nombre>\n");
+                return;
+            }
+
+            // Tomamos la ruta actual de la GUI
+            File newFolder = new File(consola.getDirectorioActual(), FolderName);
+
+            if(newFolder.exists()){
+                consola.EscribirSalida("Error: Ya existe una carpeta con ese nombre\n");
+            } else {
+                if(newFolder.mkdir()){
+                    consola.EscribirSalida("Carpeta '" + FolderName + "' creada exitosamente.\n");
+                } else {
+                    consola.EscribirSalida("Error: No se pudo crear la carpeta\n");
+                }
             }
         }
-    }
-    
-    
+
     public void mifile (String FileName){
         if(FileName.isEmpty()){
              consola.EscribirSalida("Error: Debes especificar un nombre para el archivo...");
