@@ -272,19 +272,19 @@ public class Gui extends JFrame {
         String comando = linea.split("\\s+")[0].toUpperCase();
 
         switch (comando){
-            case "MKDIR":
+            case "Mkdir":
                 EscribirSalida("[MKDIR - y la logica\n");
                 break;
                 
-            case "MFILE":
+            case "Mfile":
                 EscribirSalida("MFILE - y la logica\n");
                 break;
                 
-            case "RM":
+            case "Rm":
                 EscribirSalida("[RM - y la logica\n");
                 break;
                 
-            case "CD":
+            case "Cd":
                 EscribirSalida("[CD - y la logica\n");
                 break;
                 
@@ -292,23 +292,23 @@ public class Gui extends JFrame {
                 EscribirSalida("[<...> - y la logica\n");
                 break;
                 
-            case "DIR":
+            case "Dir":
                 EscribirSalida("[DIR - y la logica\n");
                 break;
                 
-            case "DATE":
+            case "Date":
                 EscribirSalida("[DATE - y la logica\n");
                 break;
                 
-            case "TIME":
+            case "Time":
                 EscribirSalida("[TIME - y la logica\n");
                 break;
                 
-            case "WR":
+            case "Wr":
                 EscribirSalida("[WR - y la logica\n");
                 break;
                 
-            case "RD":
+            case "Rd":
                 EscribirSalida("[RD - y la logica\n");
                 break;
                 
