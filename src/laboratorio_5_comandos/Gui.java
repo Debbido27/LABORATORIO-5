@@ -20,7 +20,7 @@ public class Gui extends JFrame {
     
     CMD1_5 logicaBase = new CMD1_5(this);
     comandosp2 logicaP2 = new comandosp2(this);
-    private File dirActual = new File(System.getProperty("User.dir"));
+    private File dirActual = new File(System.getProperty("user.dir"));
     private boolean modoEscritura = false;
     private String archivoEscritura ="";
     private String rutaActual = System.getProperty("user.dir");
@@ -53,15 +53,13 @@ public class Gui extends JFrame {
         getRootPane().setBorder(BorderFactory.createLineBorder(new Color(60, 60, 60), 1));
 
     }
-    public void wr(String nombreArchivo){
-    if(nombreArchivo.isEmpty()){
-        consola.EscribirSalida("Uso: wr <archivo.ext>");
-        return;
-    }
-    // Aquí simplemente notificamos a GUI que empiece el modo escritura
-    consola.iniciarModoEscritura(nombreArchivo);
-}
-    
+            public void wr(String nombreArchivo){
+                if(nombreArchivo.isEmpty()){
+                    EscribirSalida("Uso: wr <archivo.ext>");
+                    return;
+                }
+                iniciarModoEscritura(nombreArchivo);
+            }
     private void Construir_UI(){
         setLayout(new BorderLayout());
         add(CrearBarraTitulo(), BorderLayout.NORTH);
@@ -311,7 +309,7 @@ public class Gui extends JFrame {
             case "rm":    logicaBase.rm(arg);      break;
             case "cd":    logicaBase.cd(arg);      break;
             case "<...>": logicaBase.cd("..");     break;
-            case "dir":   logicaP2.dir();        break;
+     //      case "dir":   logicaP2.dir();        break;
             case "date":  logicaP2.date();         break;
             case "time":  logicaP2.time();         break;
             case "wr":    logicaP2.wr(arg);        break;
