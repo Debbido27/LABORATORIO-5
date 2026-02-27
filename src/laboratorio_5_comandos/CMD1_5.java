@@ -11,8 +11,8 @@ public class CMD1_5 {
     private File dirActual;
        private Gui consola;
 
-    public  CMD1_5(){
-        this.dirActual=new File(System.getProperty("user.dir"));
+    public  CMD1_5(Gui consola){
+        this.dirActual = new File(System.getProperty("user.dir"));
         this.consola = consola;
     }
     

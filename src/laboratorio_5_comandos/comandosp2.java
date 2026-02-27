@@ -28,7 +28,7 @@ public class comandosp2 {
     
     public void time() {
         String hora = new SimpleDateFormat("HH:mm:ss").format(new Date());
-        consola.escribirLinea("La fecha actual es: " + fecha);
+        consola.EscribirSalida("La fecha actual es: " + hora + "/n");
     }
     
     public void wr(String nombreArchivo)  {
@@ -51,7 +51,8 @@ public class comandosp2 {
         
         try (FileWriter fw = new FileWriter(archivo, true)){
             while(true){
-                String linea = consola.pedirTexto("(Ingrese texto EXIT para terminar):");
+                writerActivo = new FileWriter(archivo, true);
+                consola.iniciarModoEscritura(nombreArchivo);
                 if(linea == null){ 
                     consola.EscribirSalida("Escritura Cancelada");
                     break;
@@ -69,6 +70,7 @@ public class comandosp2 {
             consola.EscribirSalida("Error al escribir; " + e.getMessage());
         }
     }
+    
     
     public void rd(String nombreArchivo){
         if(nombreArchivo.isEmpty()){

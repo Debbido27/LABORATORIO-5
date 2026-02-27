@@ -18,6 +18,9 @@ public class Gui extends JFrame {
     private JLabel    labelRuta;
     private JLabel    labelInfo;
     
+    CMD1_5 logicaBase = new CMD1_5();
+    comandosp2 logicaP2 = new comandosp2();
+    
     private String rutaActual = System.getProperty("user.dir");
     private int    inicioLinea = 0;
 
@@ -252,6 +255,26 @@ public class Gui extends JFrame {
         return barra;
     }
     
+    public void escribirLinea(String texto) {
+    EscribirSalida(texto + "\n");
+    }
+
+    public String getDirectorioActual() {
+        return dirActual.getAbsolutePath();
+    }
+
+    public void setDirectorioActual(File dir) {
+        this.dirActual = dir;
+        this.rutaActual = dir.getAbsolutePath();
+    }
+
+    public void iniciarModoEscritura(String nombreArchivo) {
+        modoEscritura = true;
+        archivoEscritura = nombreArchivo;
+        EscribirSalida("(Escriba texto. Escriba EXIT para terminar)\n>> ");
+        inicioLinea = areaConsola.getDocument().getLength();
+    }
+
     private void ProcesarComando() {
         int fin = areaConsola.getDocument().getLength();
         String linea;
@@ -269,48 +292,19 @@ public class Gui extends JFrame {
 
         EscribirSalida("\n");
 
-        String comando = linea.split("\\s+")[0].toUpperCase();
+        String comando = linea.split("\\s+")[0].toLowerCase();
 
         switch (comando){
-            case "Mkdir":
-                EscribirSalida("[MKDIR - y la logica\n");
-                break;
-                
-            case "Mfile":
-                EscribirSalida("MFILE - y la logica\n");
-                break;
-                
-            case "Rm":
-                EscribirSalida("[RM - y la logica\n");
-                break;
-                
-            case "Cd":
-                EscribirSalida("[CD - y la logica\n");
-                break;
-                
-            case "<...>":
-                EscribirSalida("[<...> - y la logica\n");
-                break;
-                
-            case "Dir":
-                EscribirSalida("[DIR - y la logica\n");
-                break;
-                
-            case "Date":
-                EscribirSalida("[DATE - y la logica\n");
-                break;
-                
-            case "Time":
-                EscribirSalida("[TIME - y la logica\n");
-                break;
-                
-            case "Wr":
-                EscribirSalida("[WR - y la logica\n");
-                break;
-                
-            case "Rd":
-                EscribirSalida("[RD - y la logica\n");
-                break;
+            case "mkdir": logicaBase.mkdirs(arg);  break;
+            case "mfile": logicaBase.mfile(arg);   break;
+            case "rm":    logicaBase.rm(arg);      break;
+            case "cd":    logicaBase.cd(arg);      break;
+            case "<...>": logicaBase.cd("..");     break;
+            case "dir":   logicaBase.dir();        break;
+            case "date":  logicaP2.date();         break;
+            case "time":  logicaP2.time();         break;
+            case "wr":    logicaP2.wr(arg);        break;
+            case "rd":    logicaP2.rd(arg);        break;
                 
             default:
                 EscribirSalida("'" + linea + "' no se reconoce el comando ingresado.\n");
