@@ -75,12 +75,17 @@ public class CMD1_5 {
             return;
         }
         
+        File newFolder = new File (dirActual, nombreFolder);
         
+        if(newFolder.exists()){
+            System.out.println("Error: Ya existe una carpeta con ese nombre");
+        }else{
+            if(newFolder.mkdir()){
+                System.out.println("Carpeta '"+nombreFolder + "'creada exitosamente.");
+            }else{
+                System.out.println("Eror: No se pudo crear la carpeta");
+            }
         }
-    
-    
-    
-    
     }
     
     
