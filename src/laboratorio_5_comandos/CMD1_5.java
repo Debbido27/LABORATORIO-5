@@ -41,26 +41,31 @@ public class CMD1_5 {
     }
     
     private void procesarComando(String comando){
-        String [] partes = comando.split("",2);
+        String [] partes = comando.split(" ",2);
         String comandoPrincipal = partes [0].toLowerCase();
-        String argumento = partes.length > 1 ? partes[1]:"";
+        String comandos = partes.length > 1 ? partes[1]:"";
         
         //SWITCH PARA LOS COMANDOS DEL USUARIO
         
         switch (comandoPrincipal){
-            case "mkdirs":
+            case "mkdir":
+                mkdirs(comandos);
                 break;
                 
             case  "mfile":
+                Mfile(comandos);
                 break;
                 
             case "Rm":
+                Rm(comandos);
                 break;
                 
             case "Cd":
+                Cd(comandos);
                 break;
                 
             case "<...>":
+                Cd("..");
                 break;
                 
             default:
@@ -126,13 +131,11 @@ public class CMD1_5 {
             System.out.println("Error: No existe un archivo o carpeta con el nombre '"+nombre+" '");
             return;
         }
-        
-        if(elemento.isDirectory()){
+      
             if(elemento.delete()){
                 System.out.println("Carpeta '"+nombre+"' eliminada exisotamente...");
             }else{
-                System.out.println("Error: No se pudo eliminar el archivo...");
-            }
+                System.out.println("Error: No se pudo eliminar el archivo...");  
         }
     }
     
