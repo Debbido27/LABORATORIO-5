@@ -309,7 +309,7 @@ public class Gui extends JFrame {
             case "rm":    logicaBase.rm(arg);      break;
             case "cd":    logicaBase.cd(arg);      break;
             case "<...>": logicaBase.cd("..");     break;
-     //      case "dir":   logicaP2.dir();        break;
+          case "dir":   logicaP2.dir();        break;
             case "date":  logicaP2.date();         break;
             case "time":  logicaP2.time();         break;
             case "wr":    logicaP2.wr(arg);        break;
