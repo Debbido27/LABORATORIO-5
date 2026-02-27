@@ -41,7 +41,7 @@ public class CMD1_5 {
         }
     }
     
-    private void procesarComando(String comando){
+    public void procesarComando(String comando){
         String [] partes = comando.split(" ",2);
         String comandoPrincipal = partes [0].toLowerCase();
         String comandos = partes.length > 1 ? partes[1]:"";
@@ -50,23 +50,23 @@ public class CMD1_5 {
         
         switch (comandoPrincipal){
             case "mkdir":
-                mkdirs(comandos);
+                mkdir(comandos);
                 break;
                 
             case  "mfile":
-                Mfile(comandos);
+                mifile(comandos);
                 break;
                 
-            case "Rm":
-                Rm(comandos);
+            case "rm":
+                rm(comandos);
                 break;
                 
-            case "Cd":
-                Cd(comandos);
+            case "cd":
+                cd(comandos);
                 break;
                 
             case "<...>":
-                Cd("..");
+                cd("..");
                 break;
                 
             default:
@@ -75,7 +75,7 @@ public class CMD1_5 {
         }
     }
     
-    private void mkdirs(String FolderName){
+    public void mkdir(String FolderName){
         if(FolderName.isEmpty()){
              consola.EscribirSalida("ERROR: Especificar nombre para la carpeta...");
              consola.EscribirSalida("Ex: mkdir <nombre> ");
@@ -96,7 +96,7 @@ public class CMD1_5 {
     }
     
     
-    private void Mfile (String FileName){
+    public void mifile (String FileName){
         if(FileName.isEmpty()){
              consola.EscribirSalida("Error: Debes especificar un nombre para el archivo...");
              consola.EscribirSalida("Ex: mfile <nombre.ext>");
@@ -119,7 +119,7 @@ public class CMD1_5 {
     }
     
     
-    private void Rm(String nombre){
+    public void rm(String nombre){
         if(nombre.isEmpty()){
              consola.EscribirSalida("Error:  Debe especificar el nombre del archivo o carpeta");
              consola.EscribirSalida("Uso: rm <nombre>");
@@ -134,13 +134,13 @@ public class CMD1_5 {
         }
       
             if(elemento.delete()){
-                System.out.println("Carpeta '"+nombre+"' eliminada exisotamente...");
+                 consola.EscribirSalida("Carpeta '"+nombre+"' eliminada exisotamente...");
             }else{
-                System.out.println("Error: No se pudo eliminar el archivo...");  
+                 consola.EscribirSalida("Error: No se pudo eliminar el archivo...");  
         }
     }
     
-    private void Cd(String FolderNombre){
+    public void cd(String FolderNombre){
         if(FolderNombre.isEmpty()){
              consola.EscribirSalida("Error: Debe especificar una carpeta...");
              consola.EscribirSalida("Ex: cd <nombre carpeta>");

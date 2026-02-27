@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package laboratorio_5_comandos;
-
+import java.io.File;
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.text.*;
@@ -18,9 +18,11 @@ public class Gui extends JFrame {
     private JLabel    labelRuta;
     private JLabel    labelInfo;
     
-    CMD1_5 logicaBase = new CMD1_5();
-    comandosp2 logicaP2 = new comandosp2();
-    
+    CMD1_5 logicaBase = new CMD1_5(this);
+    comandosp2 logicaP2 = new comandosp2(this);
+    private File dirActual = new File(System.getProperty("User.dir"));
+    private boolean modoEscritura = false;
+    private String archivoEscritura ="";
     private String rutaActual = System.getProperty("user.dir");
     private int    inicioLinea = 0;
 
@@ -51,7 +53,14 @@ public class Gui extends JFrame {
         getRootPane().setBorder(BorderFactory.createLineBorder(new Color(60, 60, 60), 1));
 
     }
-    
+    public void wr(String nombreArchivo){
+    if(nombreArchivo.isEmpty()){
+        consola.EscribirSalida("Uso: wr <archivo.ext>");
+        return;
+    }
+    // Aquí simplemente notificamos a GUI que empiece el modo escritura
+    consola.iniciarModoEscritura(nombreArchivo);
+}
     
     private void Construir_UI(){
         setLayout(new BorderLayout());
@@ -293,14 +302,16 @@ public class Gui extends JFrame {
         EscribirSalida("\n");
 
         String comando = linea.split("\\s+")[0].toLowerCase();
-
+        String[] partes = linea.split("\\s+", 2);
+         comando = partes[0].toLowerCase();
+        String arg = partes.length > 1 ? partes[1] : "";
         switch (comando){
-            case "mkdir": logicaBase.mkdirs(arg);  break;
-            case "mfile": logicaBase.mfile(arg);   break;
+            case "mkdir": logicaBase.mkdir(arg);  break;
+            case "mfile": logicaBase.mifile(arg);   break;
             case "rm":    logicaBase.rm(arg);      break;
             case "cd":    logicaBase.cd(arg);      break;
             case "<...>": logicaBase.cd("..");     break;
-            case "dir":   logicaBase.dir();        break;
+            case "dir":   logicaP2.dir();        break;
             case "date":  logicaP2.date();         break;
             case "time":  logicaP2.time();         break;
             case "wr":    logicaP2.wr(arg);        break;

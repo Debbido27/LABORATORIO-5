@@ -31,46 +31,26 @@ public class comandosp2 {
         consola.EscribirSalida("La fecha actual es: " + hora + "/n");
     }
     
-    public void wr(String nombreArchivo)  {
-        if(nombreArchivo.isEmpty()){
-            consola.EscribirSalida("Uso: wr <archivo.ext>");
-            return;
-        }
-        
-        String ruta = consola.getDirectorioActual()+java.io.File.separator+nombreArchivo;
-        
-        java.io.File archivo = new java.io.File(ruta);
-        if(!archivo.exists()){
-            consola.EscribirSalida("El archivo no existe: " + nombreArchivo);
-            consola.EscribirSalida("Cree el arhcivo primero con: mfile" + nombreArchivo);
-            return;
-        }
-        
-        consola.EscribirSalida("Escribiendo en: " + nombreArchivo);
-        consola.EscribirSalida("(Escriba texto linea por linea. Escriba EXIT para terminar)");
-        
-        try (FileWriter fw = new FileWriter(archivo, true)){
-            while(true){
-                writerActivo = new FileWriter(archivo, true);
-                consola.iniciarModoEscritura(nombreArchivo);
-                if(linea == null){ 
-                    consola.EscribirSalida("Escritura Cancelada");
-                    break;
-                }
-                
-                if(linea.equals("EXIT")){
-                    consola.EscribirSalida("Escritura finalizada");
-                    break;
-                }
-                
-                fw.write(linea + System.lineSeparator());
-                consola.EscribirSalida(linea);         
-            }
-        } catch (Exception e) {
-            consola.EscribirSalida("Error al escribir; " + e.getMessage());
-        }
+  public void wr(String nombreArchivo) {
+    if (nombreArchivo.isEmpty()) {
+        consola.EscribirSalida("Uso: wr <archivo.ext>\n");
+        return;
     }
-    
+
+    String ruta = consola.getDirectorioActual() + java.io.File.separator + nombreArchivo;
+    java.io.File archivo = new java.io.File(ruta);
+
+    if (!archivo.exists()) {
+        consola.EscribirSalida("El archivo no existe: " + nombreArchivo + "\n");
+        consola.EscribirSalida("Cree el archivo primero con: mfile " + nombreArchivo + "\n");
+        return;
+    }
+
+    consola.iniciarModoEscritura(nombreArchivo);
+
+    consola.EscribirSalida("Escribiendo en: " + nombreArchivo + "\n");
+    consola.EscribirSalida("(Escriba texto línea por línea. Escriba EXIT para terminar)\n>> ");
+}    
     
     public void rd(String nombreArchivo){
         if(nombreArchivo.isEmpty()){
