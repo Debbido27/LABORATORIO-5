@@ -318,7 +318,6 @@ public class Gui extends JFrame {
         }
 
         EscribirSalida("\n");
-        labelRuta.setText("  " + rutaActual);
         areaConsola.setCaretPosition(areaConsola.getDocument().getLength());
         EscribirPrompt();
     }
