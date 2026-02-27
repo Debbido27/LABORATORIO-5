@@ -68,8 +68,19 @@ public class CMD1_5 {
         }
     }
     
-    private void mkdirs(String nombreFile){
+    private void mkdirs(String nombreFolder){
+        if(nombreFolder.isEmpty()){
+            System.out.println("ERROR: Especificar nombre para la carpeta...");
+            System.out.println("Ex: mkdir <nombre> ");
+            return;
+        }
         
+        
+        }
+    
+    
+    
+    
     }
     
     
