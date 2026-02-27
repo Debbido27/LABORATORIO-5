@@ -33,9 +33,44 @@ public class CMD1_5 {
                 //ignorar
                 continue;
             }else{
-                
+               procesarComando(comando); 
             }
             
         }
     }
+    
+    private void procesarComando(String comando){
+        String [] partes = comando.split("",2);
+        String comandoPrincipal = partes [0].toLowerCase();
+        String argumento = partes.length > 1 ? partes[1]:"";
+        
+        //SWITCH PARA LOS COMANDOS DEL USUARIO
+        
+        switch (comandoPrincipal){
+            case "mkdirs":
+                break;
+                
+            case  "mfile":
+                break;
+                
+            case "Rm":
+                break;
+                
+            case "Cd":
+                break;
+                
+            case "<...>":
+                break;
+                
+            default:
+                System.out.println("'"+comandoPrincipal+"' no se reconoce como un comando interno.");
+                break;
+                
+            
+        }
+    }
+    
+    
+    
+    
 }
