@@ -21,6 +21,34 @@ public class comandosp2 {
         this.consola = consola; 
     }
     
+    public void dir() {
+        java.io.File carpeta = new java.io.File(consola.getDirectorioActual());
+        java.io.File[] contenido = carpeta.listFiles();
+
+        consola.EscribirSalida(" Directorio: " + consola.getDirectorioActual() + "\n\n");
+
+        if (contenido == null || contenido.length == 0) {
+            consola.EscribirSalida("El directorio esta vacio.\n");
+            return;
+    }
+
+        int archivos = 0, carpetas = 0;
+
+        for (java.io.File f : contenido) {
+            if (f.isDirectory()) {
+                consola.EscribirSalida("<DIR>    " + f.getName() + "\n");
+                carpetas++;
+            } else {
+                consola.EscribirSalida("         " + f.getName() + "\n");
+                archivos++;
+        }
+    }
+
+        consola.EscribirSalida("\n");
+        consola.EscribirSalida("         " + archivos + " archivos\n");
+        consola.EscribirSalida("         " + carpetas + " carpetas\n");
+    }
+    
     public void date(){
         String fecha = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
         consola.EscribirSalida("La fecha actual es: " + fecha);
