@@ -2,6 +2,7 @@
 package laboratorio_5_comandos;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
 
@@ -94,6 +95,20 @@ public class CMD1_5 {
             System.out.println("Error: Debes especificar un nombre para el archivo...");
             System.out.println("Ex: mfile <nombre.ext>");
             return;
+        }
+        
+        File newFile = new File(dirActual, FileName);
+        
+        if(newFile.exists()){
+            System.out.println("Error: Ya existe un archivo con ese nombre");
+        }else{
+            try{
+                if(newFile.createNewFile()){
+                    System.out.println("Archivo '"+FileName+"' creado exitosamente");
+                }
+            }catch(IOException e){
+                System.out.println("Error al crera archivo"+e.getMessage());
+            }
         }
     }
     
