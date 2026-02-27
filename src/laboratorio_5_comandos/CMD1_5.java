@@ -106,12 +106,35 @@ public class CMD1_5 {
                 if(newFile.createNewFile()){
                     System.out.println("Archivo '"+FileName+"' creado exitosamente");
                 }
-            }catch(IOException e){
+            }catch(IOException e){                         //Se investigo get message imprime el error especifico
                 System.out.println("Error al crera archivo"+e.getMessage());
             }
         }
     }
     
+    
+    private void Rm(String nombre){
+        if(nombre.isEmpty()){
+            System.out.println("Error:  Debe especificar el nombre del archivo o carpeta");
+            System.out.println("Uso: rm <nombre>");
+            return;
+        }
+        
+        File elemento = new File (dirActual,nombre);
+        
+        if(!elemento.exists()){
+            System.out.println("Error: No existe un archivo o carpeta con el nombre '"+nombre+" '");
+            return;
+        }
+        
+        if(elemento.isDirectory()){
+            if(elemento.delete()){
+                System.out.println("Carpeta '"+nombre+"' eliminada exisotamente...");
+            }else{
+                System.out.println("Error: No se pudo eliminar el archivo...");
+            }
+        }
+    }
     
     
     
