@@ -64,10 +64,12 @@ public class CMD1_5 {
                 
             default:
                 System.out.println("'"+comandoPrincipal+"' no se reconoce como un comando interno.");
-                break;
-                
-            
+                break;    
         }
+    }
+    
+    private void mkdirs(String nombreFile){
+        
     }
     
     
