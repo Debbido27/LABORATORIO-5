@@ -16,11 +16,26 @@ public class CMD1_5 {
     
     public void iniciar(){
         String comando;
-        boolean corriendo = true;
+        boolean ejecutando = true;
         
         System.out.println("CONSOLA CMD");
         System.out.println("Escribe 'EXIT' para salir");
         System.out.println();
         
+        while(ejecutando){
+            System.out.println(dirActual.getPath()+">");
+            comando = entrada.nextLine().trim();
+            
+            if(comando.equalsIgnoreCase("exit")){
+                //se pone en false para terminar
+                ejecutando=false;
+            }else if(comando.isEmpty()){
+                //ignorar
+                continue;
+            }else{
+                
+            }
+            
+        }
     }
 }
