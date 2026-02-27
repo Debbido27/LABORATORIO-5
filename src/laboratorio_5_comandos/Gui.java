@@ -9,7 +9,7 @@ import javax.swing.border.*;
 import javax.swing.text.*;
 import java.awt.*;
 import java.awt.event.*; 
-
+import java.io.FileWriter;
 
 public class Gui extends JFrame {
     
@@ -282,46 +282,65 @@ public class Gui extends JFrame {
         inicioLinea = areaConsola.getDocument().getLength();
     }
 
-    private void ProcesarComando() {
-        int fin = areaConsola.getDocument().getLength();
-        String linea;
-        try {
-            linea = areaConsola.getDocument().getText(inicioLinea, fin - inicioLinea).trim();
-        } catch (BadLocationException ex) {
-            linea = "";
-        }
-
-        if (linea.isEmpty()) {
-            EscribirSalida("\n\n");
-            EscribirPrompt();
-            return;
-        }
-
-        EscribirSalida("\n");
-
-        String comando = linea.split("\\s+")[0].toLowerCase();
-        String[] partes = linea.split("\\s+", 2);
-         comando = partes[0].toLowerCase();
-        String arg = partes.length > 1 ? partes[1] : "";
-        switch (comando){
-            case "mkdir": logicaBase.mkdir(arg);  break;
-            case "mfile": logicaBase.mifile(arg);   break;
-            case "rm":    logicaBase.rm(arg);      break;
-            case "cd":    logicaBase.cd(arg);      break;
-            case "<...>": logicaBase.cd("..");     break;
-          case "dir":   logicaP2.dir();        break;
-            case "date":  logicaP2.date();         break;
-            case "time":  logicaP2.time();         break;
-            case "wr":    logicaP2.wr(arg);        break;
-            case "rd":    logicaP2.rd(arg);        break;
-                
-            default:
-                EscribirSalida("'" + linea + "' no se reconoce el comando ingresado.\n");
-                break;
-        }
-
-        EscribirSalida("\n");
-        areaConsola.setCaretPosition(areaConsola.getDocument().getLength());
-        EscribirPrompt();
+private void ProcesarComando() {
+    int fin = areaConsola.getDocument().getLength();
+    String linea;
+    try {
+        linea = areaConsola.getDocument().getText(inicioLinea, fin - inicioLinea).trim();
+    } catch (BadLocationException ex) {
+        linea = "";
     }
+
+    EscribirSalida("\n");
+    if (modoEscritura) {
+        if (linea.equals("EXIT")) {
+            modoEscritura = false;
+            archivoEscritura = "";
+            EscribirSalida("Escritura finalizada.\n\n");
+            EscribirPrompt();
+        } else {
+
+            String ruta = getDirectorioActual() + java.io.File.separator + archivoEscritura;
+            try (FileWriter fw = new FileWriter(ruta, true)) {
+                fw.write(linea + System.lineSeparator());
+            } catch (Exception e) {
+                EscribirSalida("Error al escribir: " + e.getMessage() + "\n");
+            }
+  
+            EscribirSalida(">> ");
+            inicioLinea = areaConsola.getDocument().getLength();
+        }
+        return; 
+    }
+
+
+    if (linea.isEmpty()) {
+        EscribirSalida("\n");
+        EscribirPrompt();
+        return;
+    }
+
+    String[] partes = linea.split("\\s+", 2);
+    String comando = partes[0].toLowerCase();
+    String arg = partes.length > 1 ? partes[1] : "";
+
+    switch (comando) {
+        case "mkdir": logicaBase.mkdir(arg);  break;
+        case "mfile": logicaBase.mifile(arg); break;
+        case "rm":    logicaBase.rm(arg);     break;
+        case "cd":    logicaBase.cd(arg);     break;
+        case "<...>": logicaBase.cd("..");    break;
+        case "dir":   logicaP2.dir();         break;
+        case "date":  logicaP2.date();        break;
+        case "time":  logicaP2.time();        break;
+        case "wr":    logicaP2.wr(arg);       break;
+        case "rd":    logicaP2.rd(arg);       break;
+        default:
+            EscribirSalida("'" + linea + "' no se reconoce el comando ingresado.\n");
+    }
+
+    EscribirSalida("\n");
+    areaConsola.setCaretPosition(areaConsola.getDocument().getLength());
+    EscribirPrompt();
+}
 }

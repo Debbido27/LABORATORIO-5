@@ -59,26 +59,21 @@ public class comandosp2 {
         consola.EscribirSalida("La fecha actual es: " + hora + "/n");
     }
     
-  public void wr(String nombreArchivo) {
+public void wr(String nombreArchivo) {
     if (nombreArchivo.isEmpty()) {
         consola.EscribirSalida("Uso: wr <archivo.ext>\n");
         return;
     }
-
     String ruta = consola.getDirectorioActual() + java.io.File.separator + nombreArchivo;
     java.io.File archivo = new java.io.File(ruta);
-
     if (!archivo.exists()) {
         consola.EscribirSalida("El archivo no existe: " + nombreArchivo + "\n");
         consola.EscribirSalida("Cree el archivo primero con: mfile " + nombreArchivo + "\n");
         return;
     }
-
-    consola.iniciarModoEscritura(nombreArchivo);
-
     consola.EscribirSalida("Escribiendo en: " + nombreArchivo + "\n");
-    consola.EscribirSalida("(Escriba texto línea por línea. Escriba EXIT para terminar)\n>> ");
-}    
+    consola.iniciarModoEscritura(nombreArchivo);
+}   
     
     public void rd(String nombreArchivo){
         if(nombreArchivo.isEmpty()){
