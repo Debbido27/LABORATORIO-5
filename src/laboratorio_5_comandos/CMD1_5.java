@@ -68,23 +68,32 @@ public class CMD1_5 {
         }
     }
     
-    private void mkdirs(String nombreFolder){
-        if(nombreFolder.isEmpty()){
+    private void mkdirs(String FolderName){
+        if(FolderName.isEmpty()){
             System.out.println("ERROR: Especificar nombre para la carpeta...");
             System.out.println("Ex: mkdir <nombre> ");
             return;
         }
         
-        File newFolder = new File (dirActual, nombreFolder);
+        File newFolder = new File (dirActual, FolderName);
         
         if(newFolder.exists()){
             System.out.println("Error: Ya existe una carpeta con ese nombre");
         }else{
             if(newFolder.mkdir()){
-                System.out.println("Carpeta '"+nombreFolder + "'creada exitosamente.");
+                System.out.println("Carpeta '"+FolderName + "'creada exitosamente.");
             }else{
                 System.out.println("Eror: No se pudo crear la carpeta");
             }
+        }
+    }
+    
+    
+    private void Mfile (String FileName){
+        if(FileName.isEmpty()){
+            System.out.println("Error: Debes especificar un nombre para el archivo...");
+            System.out.println("Ex: mfile <nombre.ext>");
+            return;
         }
     }
     
