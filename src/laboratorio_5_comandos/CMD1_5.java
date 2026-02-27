@@ -136,6 +136,42 @@ public class CMD1_5 {
         }
     }
     
+    private void Cd(String FolderNombre){
+        if(FolderNombre.isEmpty()){
+            System.out.println("Error: Debe especificar una carpeta...");
+            System.out.println("Ex: cd <nombre carpeta>");
+            return;
+        }
+        
+        if(FolderNombre.equals("..")){
+            File carpetaRaiz = dirActual.getParentFile();
+            
+            if(carpetaRaiz!=null){
+                dirActual = carpetaRaiz;
+                System.out.println("Dir actual cambiado a: "+dirActual.getPath());
+            }else{
+                System.out.println("Ya esta en el directorio raiz.");
+                
+            }
+            return;
+            }
+           File nuevaCarpeta = new File(dirActual,FolderNombre);
+           
+           if(!nuevaCarpeta.exists()){
+               System.out.println("Error: La carpeta '"+FolderNombre+"' no existe...");
+           }else if(!nuevaCarpeta.isDirectory()){
+               System.out.println("Error: '"+FolderNombre+"' no es una carpeta");
+           }else{
+               dirActual=nuevaCarpeta;
+               System.out.println("Directorio actual cambiado a: "+dirActual.getPath());
+           }
+        }
     
     
-}
+    
+    }
+
+
+    
+   
+
